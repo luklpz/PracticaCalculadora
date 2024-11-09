@@ -8,8 +8,6 @@ public class Main {
 
         System.out.println("Rama javier");
 
-
-
-
+        System.out.println("Rama Luka");
     }
 }
