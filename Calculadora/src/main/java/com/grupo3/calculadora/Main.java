@@ -6,8 +6,12 @@ public class Main {
 
         System.out.printf("Esto es la rama main");
 
+        System.out.println("Rama javier");
 
+        System.out.println("Rama Luka");
 
+        System.out.println("Nuevo cambio");
 
+        System.out.println("nuevo push");
     }
 }
