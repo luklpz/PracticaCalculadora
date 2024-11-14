@@ -3,10 +3,12 @@ package main.java.com.grupo3.calculadora;
 import com.grupo3.calculadora.Escaner;
 
 public class Conversiones {
-
+    /**
+     * @return devuelve un double decimal de un numero binario que pedira al usuario
+     */
     public static double convertirBinarioADecimal() {
         String binario;
-        boolean validado ;
+        boolean validado;
 
         do {
             System.out.println("Dime el binario a convertir en decimal :");
@@ -82,8 +84,4 @@ public class Conversiones {
     }
 
 
-    public static void main(String[] args) {
-
-        System.out.println(convertirBinarioADecimal());
-    }
 }
