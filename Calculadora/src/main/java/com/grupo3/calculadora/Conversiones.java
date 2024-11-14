@@ -61,27 +61,36 @@ public class Conversiones {
 
         // Recorremos la cadena de derecha a izquierda para la parte entera
         if (!binario.contains(".")) {
+            // Si no hay punto decimal, solo calculamos la parte entera
             for (int i = binario.length() - 1; i >= 0; i--) {
                 if (binario.charAt(i) == '1') {
-                    decimal += (1 << potencia);  // o Math.pow(2, potencia); //preguntar a javi si no se entiende
+                    decimal += Math.pow(2, potencia);  // Usamos Math.pow(2, potencia) para la parte entera
                 }
                 potencia++;
             }
-        }
+        } else {
+            // Si hay un punto, procesamos la parte entera y la fraccionaria
+            String[] partes = dividirBinario(binario);  // Dividimos el binario en parte entera y fraccionaria
 
-        // Verificamos si hay una parte fraccionaria
-        if (binario.contains(".")) {
-            parteFraccional = dividirBinario(binario)[1]; // Obtener la parte fraccionaria
+            // Parte entera
+            String parteEntera = partes[0];
+            for (int i = parteEntera.length() - 1; i >= 0; i--) {
+                if (parteEntera.charAt(i) == '1') {
+                    decimal += Math.pow(2, potencia);  // Usamos Math.pow(2, potencia) para la parte entera
+                }
+                potencia++;
+            }
 
+            // Parte fraccionaria
+            parteFraccional = partes[1];
             for (int i = 0; i < parteFraccional.length(); i++) {
-                // Convertir el carácter a número y sumar su valor correspondiente
-                fraccionaria += (parteFraccional.charAt(i) - '0') * Math.pow(2, -(i + 1));
-
+                if (parteFraccional.charAt(i) == '1') {
+                    fraccionaria += Math.pow(2, -(i + 1));  // Parte fraccionaria usando 2^(-i-1)
+                }
             }
         }
 
         return decimal + fraccionaria;
     }
-
 
 }
