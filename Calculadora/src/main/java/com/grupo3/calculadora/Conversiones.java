@@ -3,26 +3,25 @@ package main.java.com.grupo3.calculadora;
 import com.grupo3.calculadora.Escaner;
 
 public class Conversiones {
-    // TODO: Implementar la lógica para convertir binario a decimal
 
-    public static String convertirBinarioADecimal() {
+    public static double convertirBinarioADecimal() {
         String binario;
         String binarioInvertido;
         boolean validado = false;
+        double parteEntera = 0;
+        double parteDecimal = 0;
 
         do {
             System.out.println("Dime el binario a convertir en decimal :");
             binario = Escaner.lector.nextLine();
             validado = esBinario(binario);
-            if (validado) {  //Convierte la String con el binario en una array con cada caracter.
-                StringBuilder binarioInvertidoBuilder = new StringBuilder(binario); //Creo un StringBuilder apartir de mi String Binario para poder invertirla.
-                binarioInvertido=binarioInvertidoBuilder.reverse().toString(); // Invierto el StringBuilder y convierto el resultado a String para almacenarlo en binarioInvertido.
-
-
+            if (validado) {
+                return conversionBinarioDecimal(binario);
 
 
             } else {
                 System.err.println("Numero no binario introducido");
+                return 1;
             }
         } while (!validado);
 
@@ -34,16 +33,66 @@ public class Conversiones {
      * @return Devuelve un booleano segun si el String es binario o no.
      */
     public static boolean esBinario(String str) {
-        for (char c : str.toCharArray()) { //Recorre cada char de la String convertida en Array de caracteres
-            if (c != '0' && c != '1') {
-                return false; // Si encuentra un carácter que no es '0' o '1', devuelve false
+        boolean puntoEncontrado = false;
+        for (char c : str.toCharArray()) {
+            if (c == '.') {
+                if (puntoEncontrado) {
+                    return false; // Más de un punto decimal no es válido
+                }
+                puntoEncontrado = true; //asigno la primera aparicion
+            } else if (c != '0' && c != '1') {
+                return false; // Si encuentra un carácter que no es '0', '1' o '.', devuelve false
             }
         }
         return true; // Si todos los caracteres son válidos, devuelve true
     }
 
+    /**
+     * @param binario recibe el binario
+     * @return devuelve un array con 2 strings del binario dividido en 2 si hay punto
+     */
+    public static String[] dividirBinario(String binario) {
+        return binario.split("\\.");
+    }
+
+    /**
+     *
+     * @param binario recibe el binario
+     * @return  devuelve el binario en decimal
+     */
+    public static double conversionBinarioDecimal(String binario) {
+        String parteFraccional;
+        double decimal = 0;
+        double fraccionaria = 0;
+        int potencia = 0;
+
+        // Recorremos la cadena de derecha a izquierda para la parte entera
+        if (!binario.contains(".")) {
+            for (int i = binario.length() - 1; i >= 0; i--) {
+                if (binario.charAt(i) == '1') {
+                    decimal += (1 << potencia);  // o Math.pow(2, potencia); //preguntar a javi si no se entiende
+                }
+                potencia++;
+            }
+        }
+
+        // Verificamos si hay una parte fraccionaria
+        if (binario.contains(".")) {
+            parteFraccional = dividirBinario(binario)[1]; // Obtener la parte fraccionaria
+
+            for (int i = 0; i < parteFraccional.length(); i++) {
+                // Convertir el carácter a número y sumar su valor correspondiente
+                fraccionaria += (parteFraccional.charAt(i) - '0') * Math.pow(2, -(i + 1));
+
+            }
+        }
+
+        return decimal + fraccionaria;
+    }
+
 
     public static void main(String[] args) {
-        System.out.println("hola");
+
+        System.out.println(convertirBinarioADecimal());
     }
 }
