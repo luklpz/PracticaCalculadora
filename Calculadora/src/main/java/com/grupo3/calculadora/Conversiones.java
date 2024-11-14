@@ -6,10 +6,7 @@ public class Conversiones {
 
     public static double convertirBinarioADecimal() {
         String binario;
-        String binarioInvertido;
-        boolean validado = false;
-        double parteEntera = 0;
-        double parteDecimal = 0;
+        boolean validado ;
 
         do {
             System.out.println("Dime el binario a convertir en decimal :");
@@ -17,13 +14,8 @@ public class Conversiones {
             validado = esBinario(binario);
             if (validado) {
                 return conversionBinarioDecimal(binario);
-
-
-            } else {
-                System.err.println("Numero no binario introducido");
-                return 1;
             }
-        } while (!validado);
+        } while (true);
 
 
     }
@@ -56,9 +48,8 @@ public class Conversiones {
     }
 
     /**
-     *
      * @param binario recibe el binario
-     * @return  devuelve el binario en decimal
+     * @return devuelve el binario en decimal
      */
     public static double conversionBinarioDecimal(String binario) {
         String parteFraccional;
