@@ -1,6 +1,4 @@
-package main.java.com.grupo3.calculadora;
-
-import com.grupo3.calculadora.Escaner;
+package com.grupo3.calculadora;
 
 public class Conversiones {
     /**
@@ -14,10 +12,12 @@ public class Conversiones {
             System.out.println("Dime el binario a convertir en decimal :");
             binario = Escaner.lector.nextLine();
             validado = esBinario(binario);
-            if (validado) {
-                return conversionBinarioDecimal(binario);
+            if (!validado) {
+                System.err.println("El numero no es binario");
+
             }
-        } while (true);
+        } while (!validado);
+        return conversionBinarioDecimal(binario);
 
 
     }
@@ -92,5 +92,9 @@ public class Conversiones {
 
         return decimal + fraccionaria;
     }
+
+    //*************************************************************************************************//
+
+
 
 }
