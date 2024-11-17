@@ -96,5 +96,16 @@ public class Conversiones {
     //*************************************************************************************************//
 
 
+    /**
+     * @param numdecimal recibe el número decimal como entero
+     * @return devuelve el número decimal convertido en binario como String
+     */
+    public static String conversionDecimalBinario(int numdecimal) {
+        if (numdecimal == 0) {
+            return "0"; // Manejo del caso cero
+        }
+        return conversionDecimalBinario(numdecimal / 2) + (numdecimal % 2);
+    }
+
 
 }
