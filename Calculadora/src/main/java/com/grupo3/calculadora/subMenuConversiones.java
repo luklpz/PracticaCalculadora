@@ -13,7 +13,7 @@ public class subMenuConversiones {
                 case 0 -> System.out.println("Volviendo al menú principal...");//Volver al menú principal
                 case 1 -> ;//Decimal a binario
                 case 2 -> ;//Decimal a hexadecimal
-                case 3 -> Conversiones.convertirBinarioADecimal();//Binario a decimal
+                case 3 -> System.out.println(Conversiones.convertirBinarioADecimal());//Binario a decimal
                 case 4 -> ;//Binario a hexadecimal
                 case 5 -> ;//Hexadecimal a binario
                 case 6 -> ;//Hexadecimal a decimal
