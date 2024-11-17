@@ -1,7 +1,5 @@
 package main.java.com.grupo3.calculadora;
 
-import com.grupo3.calculadora.Escaner;
-
 public class Util {
 
     /**
