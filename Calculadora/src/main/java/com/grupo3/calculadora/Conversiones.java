@@ -1,30 +1,59 @@
 package com.grupo3.calculadora;
 
 public class Conversiones {
+
     /**
-     * @return devuelve un double decimal de un numero binario que pedira al usuario
+     * Solicita al usuario un número binario válido y lo valida.
+     *
+     * Este método pide un número binario al usuario, asegurándose de que contenga
+     * solo caracteres '0' y '1'. Si el número no es binario, muestra un mensaje
+     * de error y vuelve a solicitar la entrada.
+     *
+     * @return El número binario que el usuario ingresa, validado.
      */
-    public static double convertirBinarioADecimal() {
+    public static String obtenerBinarioValido() {
         String binario;
         boolean validado;
 
         do {
-            System.out.println("Dime el binario a convertir en decimal :");
-            binario = Escaner.lector.nextLine();
-            validado = esBinario(binario);
+            System.out.println("Dime el binario a convertir en decimal:");
+            binario = Escaner.lector.nextLine().trim(); // Leer y eliminar espacios al inicio/final
+            validado = esBinario(binario); // Validar que sea binario
             if (!validado) {
-                System.err.println("El numero no es binario");
-
+                System.err.println("El número ingresado no es binario. Asegúrate de usar solo 0s y 1s");
             }
         } while (!validado);
-        return conversionBinarioDecimal(binario);
 
-
+        return binario; // Retorna el binario válido
     }
 
     /**
-     * @param str Recibe como parametro un String que es el numero binario que queremos validar.
-     * @return Devuelve un booleano segun si el String es binario o no.
+     * Solicita un binario válido y convierte el número binario a decimal.
+     *
+     * Este método llama a `obtenerBinarioValido()` para recibir un número binario,
+     * luego lo convierte a su equivalente decimal y lo muestra en la consola.
+     */
+    public static void convertirBinarioADecimal() {
+        // Obtener un binario válido
+        String binario = obtenerBinarioValido();
+
+        // Convertir el binario a decimal
+        double decimal = conversionBinarioDecimal(binario);
+
+        // Mostrar el resultado
+        System.out.println("El número binario " + binario + " en decimal es: " + decimal);
+    }
+
+
+    /**
+     * Valida si un String es un número binario válido (solo contiene 0s y 1s).
+     *
+     * Este método recorre cada carácter del String para asegurarse de que todos sean
+     * '0', '1' o, en su caso, un único punto decimal. Si encuentra caracteres no válidos
+     * o múltiples puntos, devuelve false.
+     *
+     * @param str El String que se desea verificar como binario.
+     * @return true si el String es un número binario válido, false de lo contrario.
      */
     public static boolean esBinario(String str) {
         boolean puntoEncontrado = false;
@@ -42,16 +71,29 @@ public class Conversiones {
     }
 
     /**
-     * @param binario recibe el binario
-     * @return devuelve un array con 2 strings del binario dividido en 2 si hay punto
+     * Divide un número binario en su parte entera y fraccionaria.
+     *
+     * Este método separa el número binario en dos partes, antes y después del punto decimal,
+     * devolviendo un array con ambas partes. Si no hay punto decimal, el array tendrá
+     * solo un elemento.
+     *
+     * @param binario El número binario a dividir.
+     * @return Un array de Strings donde el primer elemento es la parte entera y el segundo
+     *         es la parte fraccionaria del binario.
      */
     public static String[] dividirBinario(String binario) {
         return binario.split("\\.");
     }
 
+
     /**
-     * @param binario recibe el binario
-     * @return devuelve el binario en decimal
+     * Convierte un número binario a decimal.
+     *
+     * Este método toma un número binario como String y lo convierte a su equivalente
+     * en decimal. Si el número tiene una parte entera y una fraccionaria, ambas se procesan.
+     *
+     * @param binario El número binario a convertir.
+     * @return El número decimal equivalente al binario proporcionado.
      */
     public static double conversionBinarioDecimal(String binario) {
         String parteFraccional;
@@ -95,16 +137,66 @@ public class Conversiones {
 
     //*************************************************************************************************//
 
+    /**
+     * Solicita al usuario un número decimal válido, lo convierte a binario
+     * * y muestra el resultado.
+     */
+    public static void convertirDecimalABinario() {
+        // Obtener un número decimal válido del usuario
+        int decimal = obtenerDecimalValido();
+
+        // Convertir el número decimal a binario
+        String binario = conversionDecimalBinario(decimal);
+
+        if (decimal==0){ //pequeño manejo del 0
+        binario="0";
+        }
+
+        // Mostrar el resultado
+        System.out.println("El número decimal " + decimal + " en binario es: " + binario);
+    }
 
     /**
-     * @param numdecimal recibe el número decimal como entero
-     * @return devuelve el número decimal convertido en binario como String
+     * Pide al usuario un número decimal y lo valida.
+     * <p>
+     * Este método le pregunta al usuario por un número decimal que sea positivo o cero.
+     * Si el número no es válido, le pide al usuario que ingrese otro.
+     *
+     * @return El número decimal que el usuario ingresa, asegurándose de que sea válido.
+     */
+    public static int obtenerDecimalValido() {
+        int decimal;
+
+        do {
+            System.out.println("Dime el decimal a convertir en binario (número no negativo):");
+            while (!Escaner.lector.hasNextInt()) { // Verifica si la entrada es un entero
+                System.out.println("Entrada no válida. Por favor, introduce un número entero.");
+                Escaner.lector.next(); // Limpia la entrada incorrecta
+            }
+            decimal = Escaner.lector.nextInt();
+        } while (decimal < 0); // Asegura que el número sea no negativo
+
+
+
+        return decimal; // Retorna el valor decimal válido
+    }
+
+    /**
+     * Convierte un número decimal a binario.
+     * <p>
+     * Este método toma un número decimal y lo convierte a binario, devolviendo
+     * el resultado como una cadena de texto.
+     *
+     * @param numdecimal El número decimal que quieres convertir a binario.
+     * @return El número binario correspondiente al decimal ingresado.
      */
     public static String conversionDecimalBinario(int numdecimal) {
         if (numdecimal == 0) {
-            return "0"; // Manejo del caso cero
+            return ""; // Caso base
         }
-        return conversionDecimalBinario(numdecimal / 2) + (numdecimal % 2);
+        return conversionDecimalBinario(numdecimal / 2) + (numdecimal % 2); //llamada recursiva
+
+
     }
 
 
