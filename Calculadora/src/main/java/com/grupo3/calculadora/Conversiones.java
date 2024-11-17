@@ -4,7 +4,7 @@ public class Conversiones {
 
     /**
      * Solicita al usuario un número binario válido y lo valida.
-     *
+     * <p>
      * Este método pide un número binario al usuario, asegurándose de que contenga
      * solo caracteres '0' y '1'. Si el número no es binario, muestra un mensaje
      * de error y vuelve a solicitar la entrada.
@@ -17,7 +17,8 @@ public class Conversiones {
 
         do {
             System.out.println("Dime el binario a convertir en decimal:");
-            binario = Escaner.lector.nextLine().trim(); // Leer y eliminar espacios al inicio/final
+            binario = Escaner.lector.nextLine();
+            binario = binario.trim(); // eliminar espacios al inicio/final
             validado = esBinario(binario); // Validar que sea binario
             if (!validado) {
                 System.err.println("El número ingresado no es binario. Asegúrate de usar solo 0s y 1s");
@@ -29,7 +30,7 @@ public class Conversiones {
 
     /**
      * Solicita un binario válido y convierte el número binario a decimal.
-     *
+     * <p>
      * Este método llama a `obtenerBinarioValido()` para recibir un número binario,
      * luego lo convierte a su equivalente decimal y lo muestra en la consola.
      */
@@ -47,7 +48,7 @@ public class Conversiones {
 
     /**
      * Valida si un String es un número binario válido (solo contiene 0s y 1s).
-     *
+     * <p>
      * Este método recorre cada carácter del String para asegurarse de que todos sean
      * '0', '1' o, en su caso, un único punto decimal. Si encuentra caracteres no válidos
      * o múltiples puntos, devuelve false.
@@ -72,14 +73,14 @@ public class Conversiones {
 
     /**
      * Divide un número binario en su parte entera y fraccionaria.
-     *
+     * <p>
      * Este método separa el número binario en dos partes, antes y después del punto decimal,
      * devolviendo un array con ambas partes. Si no hay punto decimal, el array tendrá
      * solo un elemento.
      *
      * @param binario El número binario a dividir.
      * @return Un array de Strings donde el primer elemento es la parte entera y el segundo
-     *         es la parte fraccionaria del binario.
+     * es la parte fraccionaria del binario.
      */
     public static String[] dividirBinario(String binario) {
         return binario.split("\\.");
@@ -88,7 +89,7 @@ public class Conversiones {
 
     /**
      * Convierte un número binario a decimal.
-     *
+     * <p>
      * Este método toma un número binario como String y lo convierte a su equivalente
      * en decimal. Si el número tiene una parte entera y una fraccionaria, ambas se procesan.
      *
@@ -148,8 +149,8 @@ public class Conversiones {
         // Convertir el número decimal a binario
         String binario = conversionDecimalBinario(decimal);
 
-        if (decimal==0){ //pequeño manejo del 0
-        binario="0";
+        if (decimal == 0) { //pequeño manejo del 0
+            binario = "0";
         }
 
         // Mostrar el resultado
@@ -175,7 +176,6 @@ public class Conversiones {
             }
             decimal = Escaner.lector.nextInt();
         } while (decimal < 0); // Asegura que el número sea no negativo
-
 
 
         return decimal; // Retorna el valor decimal válido
