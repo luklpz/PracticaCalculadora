@@ -4,7 +4,7 @@ public class subMenuConversiones {
     /**
      * Este metodo es el submenú de Conversiones de Bases. Imprime el menú con las opciones, lee el número introducido y según la operación eleguida llama a los metodos correspondientes
      */
-    public static void menu(){
+    public static void subMenuConv(){
         System.out.println("**************************\n** CONVERSIONES DE BASE **\n**************************\n1. De decimal a binario\n2. De decimal a hexadecimal\n3. De binario a decimal\n4. De binario a hexadecimal\n5. De hexadecimal a binario\n6. De hexadecimal a decimal\n---------------------------\n0. Volver al menú principal\nElija una opción:");
         int subMenu;
         boolean valido;
