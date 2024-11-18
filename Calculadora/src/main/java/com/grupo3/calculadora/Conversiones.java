@@ -1,6 +1,7 @@
 package main.java.com.grupo3.calculadora;
 
 public class Conversiones {
+    //BINARIO A DECIMAL
 
     /**
      * Solicita al usuario un número binario válido y lo valida.
@@ -137,6 +138,7 @@ public class Conversiones {
     }
 
     //*************************************************************************************************//
+    //DECIMAL A BINARIO
 
     /**
      * Solicita al usuario un número decimal válido, lo convierte a binario
@@ -165,7 +167,7 @@ public class Conversiones {
      *
      * @return El número decimal que el usuario ingresa, asegurándose de que sea válido.
      */
-    public static int obtenerDecimalValido() {
+    public static int obtenerDecimalValido() { //METODO REUTILIZABLE
         int decimal;
 
         do {
@@ -197,6 +199,53 @@ public class Conversiones {
         return conversionDecimalBinario(numdecimal / 2) + (numdecimal % 2); //llamada recursiva
 
 
+    }
+
+//*************************************************************************************************//
+//DECIMAL A HEXADECIMAL
+
+    /**
+     * Solicita al usuario un número decimal válido, lo convierte a hexadecimal
+     * * y muestra el resultado.
+     */
+    public static void convertirDecimalAHexadecimal() {
+        // Obtener un número decimal válido del usuario
+        int decimal = obtenerDecimalValido();
+
+        // Convertir el número decimal a hexadecimal
+        String hexadecimal = conversionDecimalAHexadecimal(decimal);
+
+        // Mostrar el resultado
+        System.out.println("El número decimal " + decimal + " en hexadecimal es: " + hexadecimal);
+    }
+
+    /**
+     *
+     * @param decimal Recibe el numero decimal para convertirlo en hexadecimal
+     * @return  Devuelve el numero convertido a hexadecimal como String
+     */
+    public static String conversionDecimalAHexadecimal(int decimal) {
+        final String HEXADECIMAL10_15 = "ABCDEF";
+        StringBuilder hexadecimal = new StringBuilder();
+
+        // Si el número es 0, devolver "0" inmediatamente
+        if (decimal == 0) {
+            return "0";
+        }
+
+        // Dividir el número por 16 hasta que sea 0
+        for (int i = decimal; i > 0; i = i / 16) {
+            int residuo = i % 16;  // Residuo de la división para obtener el valor hexadecimal
+
+            if (residuo < 10) {
+                hexadecimal.append(residuo);  // Si es menor que 10, se agrega como número
+            } else {
+                hexadecimal.append(HEXADECIMAL10_15.charAt(residuo - 10));  // Convertir 10-15 a A-F
+            }
+        }
+
+        // Invertir la cadena porque los dígitos hexadecimales se calculan de atrás hacia adelante
+        return hexadecimal.reverse().toString();
     }
 
 
