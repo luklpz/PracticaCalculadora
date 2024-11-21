@@ -257,7 +257,7 @@ public class Conversiones {
      */
     public static void convertirHexadecimalADecimal() {
         // Obtener un número hexadecimal válido del usuario
-        String hexadecimal = obtenerHexadecimalValido();
+        String hexadecimal = obtenerHexadecimalValido("Dime el hexadecimal a convertir en decimal:");
 
         // Convertir el número hexadecimal a decimal
         int decimal = conversionHexadecimalADecimal(hexadecimal);
@@ -266,11 +266,11 @@ public class Conversiones {
         System.out.println("El número hexadecimal " + hexadecimal + " en decimal es: " + decimal);
     }
 
-    public static String obtenerHexadecimalValido() { //METODO REUTILIZABLE
+    public static String obtenerHexadecimalValido(String mensaje) {
         String hexadecimal;
         boolean valido;
         do {
-            System.out.println("Dime el hexadecimal a convertir en decimal:");
+            System.out.println(mensaje);
             hexadecimal = Escaner.lector.nextLine();
             hexadecimal = hexadecimal.toUpperCase();
             valido = isHexadecimal(hexadecimal);
@@ -280,7 +280,7 @@ public class Conversiones {
     }
 
     public static boolean isHexadecimal(String hexadecimal) {
-        if(hexadecimal.length() < 1) {
+        if(hexadecimal.isEmpty()) {
             System.err.println("ERROR. Introduce un valor.");
         }
 
@@ -327,4 +327,22 @@ public class Conversiones {
         }
         return decimal;
     }
+
+//*************************************************************************************************//
+//HEXADECIMAL A BINARIO
+    public static void convertirHexadecimalABinario(){
+        // Obtener un número hexadecimal válido del usuario
+        String hexadecimal = obtenerHexadecimalValido("Dime el hexadecimal a convertir en binario:");
+
+        // Convertir el número hexadecimal a decimal
+        int decimal = conversionHexadecimalADecimal(hexadecimal);
+
+        //Convertir el número decimal a binario
+        String binario = conversionDecimalBinario(decimal);
+
+        // Mostrar el resultado
+        System.out.println("El número hexadecimal " + hexadecimal + " en binario es: " + binario);
+    }
+
+
 }
