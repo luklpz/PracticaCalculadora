@@ -16,7 +16,7 @@ public class subMenuConversiones {
                 case 3 -> Conversiones.convertirBinarioADecimal();//Binario a decimal
                 case 4 -> ;//Binario a hexadecimal
                 case 5 -> ;//Hexadecimal a binario
-                case 6 -> ;//Hexadecimal a decimal
+                case 6 -> Conversiones.convertirHexadecimalADecimal();//Hexadecimal a decimal
             }
         }while (subMenu != 0);
     }

@@ -26,4 +26,17 @@ public class Util {
         return numero;
     }
 
+    public static int potencia(int exp) {
+        int sol = 0;
+        int base = 16;
+        if (exp == 0){
+            sol = 1;
+        }else if (exp == 1) {
+            sol = base;
+        } else {
+            sol = base * potencia(exp - 1);
+        }
+        return sol;
+    }
+
 }

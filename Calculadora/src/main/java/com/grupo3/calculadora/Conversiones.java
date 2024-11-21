@@ -259,7 +259,7 @@ public class Conversiones {
         // Obtener un número hexadecimal válido del usuario
         String hexadecimal = obtenerHexadecimalValido();
 
-        // Convertir el número decimal a hexadecimal
+        // Convertir el número hexadecimal a decimal
         int decimal = conversionHexadecimalADecimal(hexadecimal);
 
         // Mostrar el resultado
@@ -272,6 +272,7 @@ public class Conversiones {
         do {
             System.out.println("Dime el hexadecimal a convertir en decimal:");
             hexadecimal = Escaner.lector.nextLine();
+            hexadecimal = hexadecimal.toUpperCase();
             valido = isHexadecimal(hexadecimal);
         } while (!valido);
 
@@ -283,7 +284,7 @@ public class Conversiones {
             System.err.println("ERROR. Introduce un valor.");
         }
 
-        char[] hexDigits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F' };
+        char[] hexDigits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
         for (char simbolo : hexadecimal.toCharArray()) {
             boolean valido = false;
@@ -301,21 +302,29 @@ public class Conversiones {
     }
 
     public static int conversionHexadecimalADecimal(String hexadecimal){
-        int decimal;
-        char[] digito = new char[hexadecimal.length()-1];
+        int decimal = 0;
+        int j = 0;
+        int[] numeros = new int[hexadecimal.length()];
+        char[] digito = new char[hexadecimal.length()];
         for (int i = hexadecimal.length()-1; i >= 0; i--){
-            int j = 0;
             digito[j] = hexadecimal.charAt(i);
-            System.out.println(digito[j]);
             j++;
         }
-        for (int i = 0; i < digito.length; i++){
-            if (Character.isDigit(digito[i])){
-                decimal += potencia(i) * digito[i];
+        for (int k = 0; k < digito.length; k++){
+            if (Character.isDigit(digito[k])){
+                numeros[k] = Character.getNumericValue(digito[k]);
+                decimal += numeros[k] * Util.potencia(k);
             }else {
-                System.out.print("No llegas");
+                switch (digito[k]){
+                    case 'A' -> decimal += 10 * Util.potencia(k);
+                    case 'B' -> decimal += 11 * Util.potencia(k);
+                    case 'C' -> decimal += 12 * Util.potencia(k);
+                    case 'D' -> decimal += 13 * Util.potencia(k);
+                    case 'E' -> decimal += 14 * Util.potencia(k);
+                    case 'F' -> decimal += 15 * Util.potencia(k);
+                };
             }
         }
-        System.out.println(decimal);
+        return decimal;
     }
 }
