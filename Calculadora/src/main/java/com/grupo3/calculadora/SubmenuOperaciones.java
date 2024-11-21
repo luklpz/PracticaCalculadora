@@ -6,7 +6,8 @@ public class SubmenuOperaciones {
         return Util.solicitarInt(submenuOperaciones,0,5,"ERROR. El número introducido no corresponde con ninunga de las opciones. Intentelo de nuevo:");
     }
 
-    public static void switchOperaciones(int opcionSeleccionada){
+    public static void switchOperaciones(){
+        int opcionSeleccionada;
         boolean cerrar=false;
 
         //Iniciamos la calculadora
