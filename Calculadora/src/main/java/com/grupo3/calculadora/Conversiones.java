@@ -248,5 +248,74 @@ public class Conversiones {
         return hexadecimal.reverse().toString();
     }
 
+//*************************************************************************************************//
+//HEXADECIMAL A DECIMAL
 
+    /**
+     * Solicita al usuario un número hexadecimal válido, lo convierte a decimal
+     * * y muestra el resultado.
+     */
+    public static void convertirHexadecimalADecimal() {
+        // Obtener un número hexadecimal válido del usuario
+        String hexadecimal = obtenerHexadecimalValido();
+
+        // Convertir el número decimal a hexadecimal
+        int decimal = conversionHexadecimalADecimal(hexadecimal);
+
+        // Mostrar el resultado
+        System.out.println("El número hexadecimal " + hexadecimal + " en decimal es: " + decimal);
+    }
+
+    public static String obtenerHexadecimalValido() { //METODO REUTILIZABLE
+        String hexadecimal;
+        boolean valido;
+        do {
+            System.out.println("Dime el hexadecimal a convertir en decimal:");
+            hexadecimal = Escaner.lector.nextLine();
+            valido = isHexadecimal(hexadecimal);
+        } while (!valido);
+
+        return hexadecimal;
+    }
+
+    public static boolean isHexadecimal(String hexadecimal) {
+        if(hexadecimal.length() < 1) {
+            System.err.println("ERROR. Introduce un valor.");
+        }
+
+        char[] hexDigits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F' };
+
+        for (char simbolo : hexadecimal.toCharArray()) {
+            boolean valido = false;
+            for (char hexDigit : hexDigits) {
+                if (simbolo == hexDigit) {
+                    valido = true;
+                    break;
+                }
+            }
+            if (!valido){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int conversionHexadecimalADecimal(String hexadecimal){
+        int decimal;
+        char[] digito = new char[hexadecimal.length()-1];
+        for (int i = hexadecimal.length()-1; i >= 0; i--){
+            int j = 0;
+            digito[j] = hexadecimal.charAt(i);
+            System.out.println(digito[j]);
+            j++;
+        }
+        for (int i = 0; i < digito.length; i++){
+            if (Character.isDigit(digito[i])){
+                decimal += potencia(i) * digito[i];
+            }else {
+                System.out.print("No llegas");
+            }
+        }
+        System.out.println(decimal);
+    }
 }
