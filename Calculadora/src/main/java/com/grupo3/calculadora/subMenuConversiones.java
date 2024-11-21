@@ -11,12 +11,12 @@ public class subMenuConversiones {
             subMenu = Util.solicitarInt("Elija una opción:\n", 0, 6, "ERROR. El número no coincide con ninguna de las opciones, PRUEBE OTRA VEZ\n");
             switch (subMenu) {
                 case 0 -> System.out.println("Volviendo al menú principal...");//Volver al menú principal
-                case 1 -> ;//Decimal a binario
-                case 2 -> ;//Decimal a hexadecimal
-                case 3 -> System.out.println(Conversiones.convertirBinarioADecimal());//Binario a decimal
+                case 1 -> Conversiones.convertirDecimalABinario();//Decimal a binario
+                case 2 -> Conversiones.convertirDecimalAHexadecimal();//Decimal a hexadecimal
+                case 3 -> Conversiones.convertirBinarioADecimal();//Binario a decimal
                 case 4 -> ;//Binario a hexadecimal
                 case 5 -> ;//Hexadecimal a binario
-                case 6 -> ;//Hexadecimal a decimal
+                case 6 -> Conversiones.convertirHexadecimalADecimal();//Hexadecimal a decimal
             }
         }while (subMenu != 0);
     }
