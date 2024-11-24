@@ -4,20 +4,22 @@ public class Conversiones {
     //BINARIO A DECIMAL
 
     /**
-     * Solicita al usuario un número binario válido y lo valida.
+     * ASolicita al ususario un número binario válido y lo valido
      * <p>
-     * Este método pide un número binario al usuario, asegurándose de que contenga
-     * solo caracteres '0' y '1'. Si el número no es binario, muestra un mensaje
-     * de error y vuelve a solicitar la entrada.
+     *  Este método pide un número binario al usuario, asegurándose de que contenga
+     *  solo caracteres '0' y '1'. Si el número no es binario, muestra un mensaje
+     *  de error y vuelve a solicitar la entrada.
+     *
+     * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este método es reutilizado.
      *
      * @return El número binario que el usuario ingresa, validado.
      */
-    public static String obtenerBinarioValido() {
+    public static String obtenerBinarioValido(String mensaje) {
         String binario;
         boolean validado;
 
         do {
-            System.out.println("Dime el binario a convertir en decimal:");
+            System.out.println(mensaje);
             binario = Escaner.lector.nextLine();
             binario = binario.trim(); // eliminar espacios al inicio/final
             validado = esBinario(binario); // Validar que sea binario
@@ -37,7 +39,7 @@ public class Conversiones {
      */
     public static void convertirBinarioADecimal() {
         // Obtener un binario válido
-        String binario = obtenerBinarioValido();
+        String binario = obtenerBinarioValido("Dime el binario a convertir en decimal:");
 
         // Convertir el binario a decimal
         double decimal = conversionBinarioDecimal(binario);
@@ -146,7 +148,7 @@ public class Conversiones {
      */
     public static void convertirDecimalABinario() {
         // Obtener un número decimal válido del usuario
-        int decimal = obtenerDecimalValido();
+        int decimal = obtenerDecimalValido("Dime el decimal a convertir en binario (número no negativo):");
 
         // Convertir el número decimal a binario
         String binario = conversionDecimalBinario(decimal);
@@ -165,13 +167,15 @@ public class Conversiones {
      * Este método le pregunta al usuario por un número decimal que sea positivo o cero.
      * Si el número no es válido, le pide al usuario que ingrese otro.
      *
+     * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este método es reutilizado.
+     *
      * @return El número decimal que el usuario ingresa, asegurándose de que sea válido.
      */
-    public static int obtenerDecimalValido() { //METODO REUTILIZABLE
+    public static int obtenerDecimalValido(String mensaje) { //METODO REUTILIZABLE
         int decimal;
 
         do {
-            System.out.println("Dime el decimal a convertir en binario (número no negativo):");
+            System.out.println(mensaje);
             while (!Escaner.lector.hasNextInt()) { // Verifica si la entrada es un entero
                 System.out.println("Entrada no válida. Por favor, introduce un número entero.");
                 Escaner.lector.next(); // Limpia la entrada incorrecta
@@ -210,7 +214,7 @@ public class Conversiones {
      */
     public static void convertirDecimalAHexadecimal() {
         // Obtener un número decimal válido del usuario
-        int decimal = obtenerDecimalValido();
+        int decimal = obtenerDecimalValido("Dime el decimal a convertir en hexadecimal (número no negativo):");
 
         // Convertir el número decimal a hexadecimal
         String hexadecimal = conversionDecimalAHexadecimal(decimal);
@@ -266,6 +270,17 @@ public class Conversiones {
         System.out.println("El número hexadecimal " + hexadecimal + " en decimal es: " + decimal);
     }
 
+    /**
+     * Solicita al usuario un número hexadecimal válido y lo valida.
+     * <p>
+     * Este método pide un número hexadecimal al usuario, asegurándose de que contenga
+     * solo números y letras de la 'A' a la 'F'. Si el número no es hexadecimal, muestra un mensaje
+     * de error y vuelve a solicitar la entrada
+     *
+     * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este método es reutilizado.
+     *
+     * @return El número hexadecimal que el usuario ingresa, validado.
+     */
     public static String obtenerHexadecimalValido(String mensaje) {
         String hexadecimal;
         boolean valido;
@@ -273,15 +288,28 @@ public class Conversiones {
             System.out.println(mensaje);
             hexadecimal = Escaner.lector.nextLine();
             hexadecimal = hexadecimal.toUpperCase();
-            valido = isHexadecimal(hexadecimal);
+            valido = esHexadecimal(hexadecimal);
+            if (!valido){
+                System.err.println("ERROR. Introduce un número hexadecimal válido.");
+            }
         } while (!valido);
 
         return hexadecimal;
     }
 
-    public static boolean isHexadecimal(String hexadecimal) {
+
+    /**
+     * Valida si un String es un número hexadecimal válido (solo contiene números y letras de la 'A' a la 'F').
+     * <p>
+     * Este método recorre cada carácter del String para asegurarse de que todos sean
+     * números o letras A-F.
+     *
+     * @param hexadecimal El String que se desea verificar como hexadecimal.
+     * @return true si el String es un número hexadecimal válido, false de lo contrario.
+     */
+    public static boolean esHexadecimal(String hexadecimal) {
         if(hexadecimal.isEmpty()) {
-            System.err.println("ERROR. Introduce un valor.");
+            return false;
         }
 
         char[] hexDigits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
@@ -301,6 +329,13 @@ public class Conversiones {
         return true;
     }
 
+    /**
+     * Convierte un número hexadecimal en un decimal.
+     *
+     * @param hexadecimal El número hexadecimal que hay que convertir en decimal.
+     *
+     * @return El número hexadecimal en base decimal.
+     */
     public static int conversionHexadecimalADecimal(String hexadecimal){
         int decimal = 0;
         int j = 0;
@@ -322,7 +357,7 @@ public class Conversiones {
                     case 'D' -> decimal += 13 * Util.potencia(k);
                     case 'E' -> decimal += 14 * Util.potencia(k);
                     case 'F' -> decimal += 15 * Util.potencia(k);
-                };
+                }
             }
         }
         return decimal;
@@ -330,6 +365,10 @@ public class Conversiones {
 
 //*************************************************************************************************//
 //HEXADECIMAL A BINARIO
+
+    /**
+     * Convierte un hexadecimal a binario, como ya hay métodos que combinados llegan a la solución, los he reutilizado.
+     */
     public static void convertirHexadecimalABinario(){
         // Obtener un número hexadecimal válido del usuario
         String hexadecimal = obtenerHexadecimalValido("Dime el hexadecimal a convertir en binario:");
@@ -345,4 +384,23 @@ public class Conversiones {
     }
 
 
+//*************************************************************************************************//
+//BINARIO A HEXADECIMAL
+
+    /**
+     * Convierte un binario a hexadecimal, como ya hay métodos que combinados llegan a la solución, los he reutilizado.
+     */
+    public static void convertirBinarioAHexadecimal(){
+        //Obtener un número binario válido del usuario
+        String binario = obtenerBinarioValido("Dime el binario a convertir en hexadecimal:");
+
+        //Convertir el número binario a decimal
+        int decimal = (int) conversionBinarioDecimal(binario);
+
+        //Convertir el número decimal a hexadecimal
+        String hexadecimal = conversionDecimalAHexadecimal(decimal);
+
+        // Mostrar el resultado
+        System.out.println("El número binario " + binario + " en hexadecimal es: " + hexadecimal);
+    }
 }
