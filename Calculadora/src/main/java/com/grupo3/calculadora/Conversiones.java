@@ -4,7 +4,7 @@ public class Conversiones {
     //BINARIO A DECIMAL
 
     /**
-     * ASolicita al ususario un número binario válido y lo valido
+     * Solicita al ususario un número binario válido y lo valido
      * <p>
      *  Este método pide un número binario al usuario, asegurándose de que contenga
      *  solo caracteres '0' y '1'. Si el número no es binario, muestra un mensaje
