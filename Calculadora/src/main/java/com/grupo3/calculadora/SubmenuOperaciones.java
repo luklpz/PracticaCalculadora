@@ -9,19 +9,24 @@ public class SubmenuOperaciones {
     public static void switchOperaciones(){
         int opcionSeleccionada;
         boolean cerrar=false;
+        double valorMemoria= Double.MIN_VALUE;
 
         //Iniciamos la calculadora
         do {
             opcionSeleccionada=menuOperaciones();
             switch (opcionSeleccionada) {
                 case 0 -> cerrar=true;
-                case 1 -> cerrar=true; //Cambiar por operación sumar.
-                case 2 -> cerrar=true; //Cambiar por operación restar.
+                case 1 -> valorMemoria = Operaciones.sumaResta(valorMemoria,true);
+                case 2 -> valorMemoria = Operaciones.sumaResta(valorMemoria,false);
                 case 3 -> cerrar=true; //Cambiar por operación multiplicar.
                 case 4 -> cerrar=true; //Cambiar por operación dividir.
                 case 5 -> cerrar=true; //Cambiar por operación resto de división
                 default -> System.err.println("ERROR: Entrada inesperada invalida.");
             }
         } while (!cerrar);
+    }
+
+    public static void main(String[] args) {
+        switchOperaciones();
     }
 }
