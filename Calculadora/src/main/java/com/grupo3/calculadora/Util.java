@@ -26,8 +26,56 @@ public class Util {
         return numero;
     }
 
+    /**
+     * Solicita un 'double' sin condiciones.
+     * @param solicitud Mensaje que se imprime para solicitar el 'double'.
+     * @param cadenaVacia Si 'true', acepta cadenas vacías y devuelve Double.MIN_VALUE
+     * @param mensajeError Mensaje de error que se muestra al introducir un valor inválido.
+     * @return Devuelve el 'double' una vez validado.
+     */
+    public static double solicitarDouble(String solicitud, boolean cadenaVacia, String mensajeError) {
+        return solicitarDouble(solicitud, Double.MIN_VALUE, Double.MAX_VALUE,cadenaVacia, mensajeError);
+    }
+
+    /**
+     * Solicita un 'double' y valida que se encuentre en el rango comprendido entre un mínimo y un máximo.
+     *
+     * @param solicitud Mensaje que se le muestra al usuario.
+     * @param minimo Número mínimo válido que puede valer el 'double'.
+     * @param maximo Número máximo válido que puede valer el 'double'.
+     * @param mensajeError Mensaje de error que se muestra al introducir un valor inválido.
+     * @return Devuelve un 'Double' validado en un rango.
+     */
+    public static double solicitarDouble(String solicitud, double minimo, double maximo, boolean cadenaVacia, String mensajeError) {
+        double respuesta = 0;
+        boolean validado=false;
+        String entrada;
+        
+        do {
+            //Solicitamos el 'double'
+            System.out.print(solicitud);
+
+            entrada = Escaner.lector.nextLine().trim().replaceAll("\\s+", "");
+
+            if (cadenaVacia&&entrada.isEmpty()){
+                    return Double.MIN_VALUE;
+            } else if (!cadenaVacia&&entrada.isEmpty()) {
+                System.err.println("\nERROR: No se han insertado números.");
+            } else {
+                respuesta = Double.parseDouble(entrada);
+                //Validamos la respuesta
+                if (respuesta<minimo||respuesta>maximo) {
+                    System.err.println(mensajeError);
+                } else {
+                    validado=true;
+                }
+            }
+        } while (!validado);
+        return respuesta;
+    }
+
     public static int potencia(int exp) {
-        int sol = 0;
+        int sol;
         int base = 16;
         if (exp == 0){
             sol = 1;
