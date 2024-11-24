@@ -32,7 +32,7 @@ public class subMenuConversiones {
                 case 1 -> Conversiones.convertirDecimalABinario();//Decimal a binario
                 case 2 -> Conversiones.convertirDecimalAHexadecimal();//Decimal a hexadecimal
                 case 3 -> Conversiones.convertirBinarioADecimal();//Binario a decimal
-                case 4 -> ;//Binario a hexadecimal
+                case 4 -> Conversiones.convertirBinarioAHexadecimal();//Binario a hexadecimal
                 case 5 -> Conversiones.convertirHexadecimalABinario();//Hexadecimal a binario
                 case 6 -> Conversiones.convertirHexadecimalADecimal();//Hexadecimal a decimal
                 default -> System.out.println();
