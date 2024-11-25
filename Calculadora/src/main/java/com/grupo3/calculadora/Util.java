@@ -1,4 +1,4 @@
-package main.java.com.grupo3.calculadora;
+package com.grupo3.calculadora;
 
 public class Util {
 
