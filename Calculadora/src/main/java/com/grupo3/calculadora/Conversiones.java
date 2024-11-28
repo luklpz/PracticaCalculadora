@@ -6,12 +6,11 @@ public class Conversiones {
     /**
      * Solicita al usuario un número binario válido y lo valida.
      * <p>
-     *  Este método pide un número binario al usuario, asegurándose de que contenga
-     *  solo caracteres '0' y '1'. Si el número no es binario, muestra un mensaje
-     *  de error y vuelve a solicitar la entrada.
+     * Este método pide un número binario al usuario, asegurándose de que contenga
+     * solo caracteres '0' y '1'. Si el número no es binario, muestra un mensaje
+     * de error y vuelve a solicitar la entrada.
      *
      * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este método es reutilizado.
-     *
      * @return El número binario que el usuario ingresa, validado.
      */
     public static String obtenerBinarioValido(String mensaje) {
@@ -50,29 +49,18 @@ public class Conversiones {
 
 
     /**
-     * Valida si un String es un número binario válido (solo contiene 0s y 1s).
-     * <p>
-     * Este método recorre cada carácter del String para asegurarse de que todos sean
-     * '0', '1' o, en su caso, un único punto decimal. Si encuentra caracteres no válidos
-     * o múltiples puntos, devuelve false.
+     * Verifica si una cadena es un número binario válido.
+     * Un número binario válido solo contiene '0' y '1',
+     * opcionalmente con un punto decimal seguido de más '0' y '1'.
      *
-     * @param str El String que se desea verificar como binario.
-     * @return true si el String es un número binario válido, false de lo contrario.
+     * @param binario La cadena a verificar.
+     * @return {@code true} si es un binario válido; {@code false} en caso contrario.
      */
-    public static boolean esBinario(String str) {
-        boolean puntoEncontrado = false;
-        for (char c : str.toCharArray()) {
-            if (c == '.') {
-                if (puntoEncontrado) {
-                    return false; // Más de un punto decimal no es válido
-                }
-                puntoEncontrado = true; //asigno la primera aparicion
-            } else if (c != '0' && c != '1') {
-                return false; // Si encuentra un carácter que no es '0', '1' o '.', devuelve false
-            }
-        }
-        return true; // Si todos los caracteres son válidos, devuelve true
+
+    public static boolean esBinario(String binario) {
+        return !binario.isEmpty() && binario.matches("[01]+(\\.[01]+)?");
     }
+
 
     /**
      * Divide un número binario en su parte entera y fraccionaria.
@@ -168,7 +156,6 @@ public class Conversiones {
      * Si el número no es válido, le pide al usuario que ingrese otro.
      *
      * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este método es reutilizado.
-     *
      * @return El número decimal que el usuario ingresa, asegurándose de que sea válido.
      */
     public static int obtenerDecimalValido(String mensaje) { //METODO REUTILIZABLE
@@ -193,17 +180,19 @@ public class Conversiones {
      * Este método toma un número decimal y lo convierte a binario, devolviendo
      * el resultado como una cadena de texto.
      *
-     * @param numdecimal El número decimal que quieres convertir a binario.
+     * @param numDecimal El número decimal que quieres convertir a binario.
      * @return El número binario correspondiente al decimal ingresado.
      */
-    public static String conversionDecimalBinario(int numdecimal) {
-        if (numdecimal == 0) {
-            return ""; // Caso base
+    public static String conversionDecimalBinario(int numDecimal) {
+        StringBuilder binario = new StringBuilder();
+        if (numDecimal == 0) return "0";
+        while (numDecimal > 0) {
+            binario.append(numDecimal % 2);
+            numDecimal /= 2;
         }
-        return conversionDecimalBinario(numdecimal / 2) + (numdecimal % 2); //llamada recursiva
-
-
+        return binario.reverse().toString();
     }
+
 
 //*************************************************************************************************//
 //DECIMAL A HEXADECIMAL
@@ -224,9 +213,8 @@ public class Conversiones {
     }
 
     /**
-     *
      * @param decimal Recibe el numero decimal para convertirlo en hexadecimal
-     * @return  Devuelve el numero convertido a hexadecimal como String
+     * @return Devuelve el numero convertido a hexadecimal como String
      */
     public static String conversionDecimalAHexadecimal(int decimal) {
         final String HEXADECIMAL10_15 = "ABCDEF";
@@ -278,7 +266,6 @@ public class Conversiones {
      * de error y vuelve a solicitar la entrada
      *
      * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este método es reutilizado.
-     *
      * @return El número hexadecimal que el usuario ingresa, validado.
      */
     public static String obtenerHexadecimalValido(String mensaje) {
@@ -289,7 +276,7 @@ public class Conversiones {
             hexadecimal = Escaner.lector.nextLine();
             hexadecimal = hexadecimal.toUpperCase();
             valido = esHexadecimal(hexadecimal);
-            if (!valido){
+            if (!valido) {
                 System.err.println("ERROR. Introduce un número hexadecimal válido.");
             }
         } while (!valido);
@@ -308,11 +295,11 @@ public class Conversiones {
      * @return true si el String es un número hexadecimal válido, false de lo contrario.
      */
     public static boolean esHexadecimal(String hexadecimal) {
-        if(hexadecimal.isEmpty()) {
+        if (hexadecimal.isEmpty()) {
             return false;
         }
 
-        char[] hexDigits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+        char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
         for (char simbolo : hexadecimal.toCharArray()) {
             boolean valido = false;
@@ -322,7 +309,7 @@ public class Conversiones {
                     break;
                 }
             }
-            if (!valido){
+            if (!valido) {
                 return false;
             }
         }
@@ -333,24 +320,23 @@ public class Conversiones {
      * Convierte un número hexadecimal en un decimal.
      *
      * @param hexadecimal El número hexadecimal que hay que convertir en decimal.
-     *
      * @return El número hexadecimal en base decimal.
      */
-    public static int conversionHexadecimalADecimal(String hexadecimal){
+    public static int conversionHexadecimalADecimal(String hexadecimal) {
         int decimal = 0;
         int j = 0;
         int[] numeros = new int[hexadecimal.length()];
         char[] digito = new char[hexadecimal.length()];
-        for (int i = hexadecimal.length()-1; i >= 0; i--){
+        for (int i = hexadecimal.length() - 1; i >= 0; i--) {
             digito[j] = hexadecimal.charAt(i);
             j++;
         }
-        for (int k = 0; k < digito.length; k++){
-            if (Character.isDigit(digito[k])){
+        for (int k = 0; k < digito.length; k++) {
+            if (Character.isDigit(digito[k])) {
                 numeros[k] = Character.getNumericValue(digito[k]);
                 decimal += numeros[k] * Util.potencia(k);
-            }else {
-                switch (digito[k]){
+            } else {
+                switch (digito[k]) {
                     case 'A' -> decimal += 10 * Util.potencia(k);
                     case 'B' -> decimal += 11 * Util.potencia(k);
                     case 'C' -> decimal += 12 * Util.potencia(k);
@@ -369,7 +355,7 @@ public class Conversiones {
     /**
      * Convierte un hexadecimal a binario, como ya hay métodos que combinados llegan a la solución, los he reutilizado.
      */
-    public static void convertirHexadecimalABinario(){
+    public static void convertirHexadecimalABinario() {
         // Obtener un número hexadecimal válido del usuario
         String hexadecimal = obtenerHexadecimalValido("Dime el hexadecimal a convertir en binario:");
 
@@ -390,7 +376,7 @@ public class Conversiones {
     /**
      * Convierte un binario a hexadecimal, como ya hay métodos que combinados llegan a la solución, los he reutilizado.
      */
-    public static void convertirBinarioAHexadecimal(){
+    public static void convertirBinarioAHexadecimal() {
         //Obtener un número binario válido del usuario
         String binario = obtenerBinarioValido("Dime el binario a convertir en hexadecimal:");
 
