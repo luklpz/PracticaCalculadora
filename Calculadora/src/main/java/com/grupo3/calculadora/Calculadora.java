@@ -8,7 +8,7 @@ public class Calculadora {
      */
     private static int menuPrincipal(){
         //String menú
-        String mainMenu = "\n\n*****************\n** CALCULADORA **\n*****************\n1. Operaciones aritméticas\n2. Conversiones de base\n--------------------------\n0. Salir del programa\n\nElija una opción:\n";
+        String mainMenu = "\n\n*****************\n** CALCULADORA **\n*****************\n1. Operaciones aritméticas\n2. Conversiones de base\n--------------------------\n0. Salir del programa\n\nElija una opción:";
         //Solicitamos y validamos las opciones del menu
         return  Util.solicitarInt(mainMenu,0,2,"Has  introducido una entrada \u001b[1;31mno válida\u001b[0m. A continuación vuelva a elejir una opción:\n");
     }
@@ -23,7 +23,7 @@ public class Calculadora {
             opcionSeleccionada=menuPrincipal();
             switch (opcionSeleccionada) {
                 case 0 -> cerrar=true;
-                case 1 -> cerrar=true; //Cambiar por menú operaciones aritméticas
+                case 1 -> SubmenuOperaciones.switchOperaciones();
                 case 2 -> subMenuConversiones.subMenuConv();
                 default -> System.out.println();
             }
