@@ -1,5 +1,7 @@
 package com.grupo3.calculadora;
 
+import java.text.DecimalFormat;
+
 public class Util {
 
     /**
@@ -50,17 +52,17 @@ public class Util {
         double respuesta = 0;
         boolean validado=false;
         String entrada;
-        
-        do {
-            //Solicitamos el 'double'
-            System.out.print(solicitud);
 
+        //Solicitamos el 'double'
+        System.out.print(solicitud);
+
+        do {
             entrada = Escaner.lector.nextLine().trim().replaceAll("\\s+", "");
 
             if (cadenaVacia&&entrada.isEmpty()){
-                    return Double.MIN_VALUE;
+                    return Double.NaN;
             } else if (!cadenaVacia&&entrada.isEmpty()) {
-                System.err.println("\nERROR: No se han insertado números.");
+                System.err.println("ERROR: No se han insertado números.");
             } else {
                 respuesta = Double.parseDouble(entrada);
                 //Validamos la respuesta
@@ -70,10 +72,31 @@ public class Util {
                     validado=true;
                 }
             }
+            if (!validado) {
+                System.out.println(solicitud);
+            }
         } while (!validado);
         return respuesta;
     }
 
+    /**
+     * Formatea un 'double' para imprimirlo con los decimales exactos que tenga.
+     *
+     * @param numero 'double' para formatear.
+     * @return Devuelve un 'String' que contiene el número formateado.
+     */
+    public static String formatDouble(double numero) {
+        // Usa DecimalFormat con un patrón que no incluye ceros innecesarios
+        DecimalFormat formato = new DecimalFormat("0.###############");
+        return formato.format(numero);
+    }
+
+    /**
+     * Realiza la potencia deseada con base 16.
+     *
+     * @param exp Exponente de la potencia
+     * @return Devuelve la solucion de la potencia.
+     */
     public static int potencia(int exp) {
         int sol;
         int base = 16;
