@@ -28,5 +28,7 @@ public class Calculadora {
                 default -> System.out.println();
             }
         } while (!cerrar);
+        Escaner.dispose();
     }
+
 }
