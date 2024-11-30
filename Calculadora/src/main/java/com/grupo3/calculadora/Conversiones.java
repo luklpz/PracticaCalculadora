@@ -148,7 +148,7 @@ public class Conversiones {
                 System.out.println("Entrada no válida. Por favor, introduce un número entero.");
                 Escaner.lector.next(); // Limpia la entrada incorrecta
             }
-            decimal = Escaner.lector.nextInt();
+            decimal = Integer.parseInt(Escaner.lector.nextLine());
         } while (decimal < 0); // Asegura que el número sea no negativo
 
 
