@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class subMenuConversiones {
 
+    /**
+     * Imprime el menú de conversiones y espera a que sea ingresada una opción.
+     *
+     * @return Devuelve un 'int' como opción seleccionada por el usuario.
+     */
     private static int subMenu(){
         Scanner scanner = new Scanner(System.in);
         int opcion = 0;
