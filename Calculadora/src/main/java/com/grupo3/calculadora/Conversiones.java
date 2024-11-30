@@ -6,11 +6,11 @@ public class Conversiones {
     /**
      * Solicita al usuario un número binario válido y lo valida.
      * <p>
-     * Este método pide un número binario al usuario, asegurándose de que contenga
+     * Este mét0do pide un número binario al usuario, asegurándose de que contenga
      * solo caracteres '0' y '1'. Si el número no es binario, muestra un mensaje
      * de error y vuelve a solicitar la entrada.
      *
-     * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este método es reutilizado.
+     * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este mét0do es reutilizado.
      * @return El número binario que el usuario ingresa, validado.
      */
     public static String obtenerBinarioValido(String mensaje) {
@@ -48,7 +48,7 @@ public class Conversiones {
     /**
      * Divide un número binario en su parte entera y fraccionaria.
      * <p>
-     * Este método separa el número binario en dos partes, antes y después del punto decimal,
+     * Este mét0do separa el número binario en dos partes, antes y después del punto decimal,
      * devolviendo un array con ambas partes. Si no hay punto decimal, el array tendrá
      * solo un elemento.
      *
@@ -64,7 +64,7 @@ public class Conversiones {
     /**
      * Convierte un número binario a decimal.
      * <p>
-     * Este método toma un número binario como String y lo convierte a su equivalente
+     * Este mét0do toma un número binario como String y lo convierte a su equivalente
      * en decimal. Si el número tiene una parte entera y una fraccionaria, ambas se procesan.
      *
      * @param binario El número binario a convertir.
@@ -112,7 +112,7 @@ public class Conversiones {
     /**
      * Solicita un binario válido y convierte el número binario a decimal.
      * <p>
-     * Este método llama a `obtenerBinarioValido()` para recibir un número binario,
+     * Este mét0do llama a `obtenerBinarioValido()` para recibir un número binario,
      * luego lo convierte a su equivalente decimal y lo muestra en la consola.
      */
     public static void convertirBinarioADecimal() {
@@ -133,10 +133,10 @@ public class Conversiones {
     /**
      * Pide al usuario un número decimal y lo valida.
      * <p>
-     * Este método le pregunta al usuario por un número decimal que sea positivo o cero.
+     * Este mét0do le pregunta al usuario por un número decimal que sea positivo o cero.
      * Si el número no es válido, le pide al usuario que ingrese otro.
      *
-     * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este método es reutilizado.
+     * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este mét0do es reutilizado.
      * @return El número decimal que el usuario ingresa, asegurándose de que sea válido.
      */
     public static int obtenerDecimalValido(String mensaje) { //METODO REUTILIZABLE
@@ -158,7 +158,7 @@ public class Conversiones {
     /**
      * Convierte un número decimal a binario.
      * <p>
-     * Este método toma un número decimal y lo convierte a binario, devolviendo
+     * Este mét0do toma un número decimal y lo convierte a binario, devolviendo
      * el resultado como una cadena de texto.
      *
      * @param numDecimal El número decimal que quieres convertir a binario.
@@ -260,11 +260,11 @@ public class Conversiones {
     /**
      * Solicita al usuario un número hexadecimal válido y lo valida.
      * <p>
-     * Este método pide un número hexadecimal al usuario, asegurándose de que contenga
+     * Este mét0do pide un número hexadecimal al usuario, asegurándose de que contenga
      * solo números y letras de la 'A' a la 'F'. Si el número no es hexadecimal, muestra un mensaje
      * de error y vuelve a solicitar la entrada
      *
-     * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este método es reutilizado.
+     * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este mét0do es reutilizado.
      * @return El número hexadecimal que el usuario ingresa, validado.
      */
     public static String obtenerHexadecimalValido(String mensaje) {
@@ -287,7 +287,7 @@ public class Conversiones {
     /**
      * Valida si un String es un número hexadecimal válido (solo contiene números y letras de la 'A' a la 'F').
      * <p>
-     * Este método recorre cada carácter del String para asegurarse de que todos sean
+     * Este mét0do recorre cada carácter del String para asegurarse de que todos sean
      * números o letras A-F.
      *
      * @param hexadecimal El String que se desea verificar como hexadecimal.
