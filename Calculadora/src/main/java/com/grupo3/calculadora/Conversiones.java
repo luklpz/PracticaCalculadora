@@ -41,74 +41,35 @@ public class Conversiones {
      */
 
     public static boolean esBinario(String binario) {
-        return !binario.isEmpty() && binario.matches("[01]+(\\.[01]+)?");
-    }
+        return !binario.isEmpty() && binario.matches("[01]+");
 
-
-    /**
-     * Divide un número binario en su parte entera y fraccionaria.
-     * <p>
-     * Este mét0do separa el número binario en dos partes, antes y después del punto decimal,
-     * devolviendo un array con ambas partes. Si no hay punto decimal, el array tendrá
-     * solo un elemento.
-     *
-     * @param binario El número binario a dividir.
-     * @return Un array de Strings donde el primer elemento es la parte entera y el segundo
-     * es la parte fraccionaria del binario.
-     */
-    public static String[] dividirBinario(String binario) {
-        return binario.split("\\.");
     }
 
 
     /**
      * Convierte un número binario a decimal.
      * <p>
-     * Este mét0do toma un número binario como String y lo convierte a su equivalente
-     * en decimal. Si el número tiene una parte entera y una fraccionaria, ambas se procesan.
+     * Este método toma un número binario entero como String y lo convierte a su equivalente
+     * en decimal.
      *
-     * @param binario El número binario a convertir.
+     * @param binario El número binario entero a convertir.
      * @return El número decimal equivalente al binario proporcionado.
      */
-    public static double conversionBinarioDecimal(String binario) {
-        String parteFraccional;
-        double decimal = 0;
-        double fraccionaria = 0;
+    public static int conversionBinarioDecimal(String binario) {
+        int decimal = 0;
         int potencia = 0;
 
-        // Recorremos la cadena de derecha a izquierda para la parte entera
-        if (!binario.contains(".")) {
-            // Si no hay punto decimal, solo calculamos la parte entera
-            for (int i = binario.length() - 1; i >= 0; i--) {
-                if (binario.charAt(i) == '1') {
-                    decimal += Math.pow(2, potencia);  // Usamos Math.pow(2, potencia) para la parte entera
-                }
-                potencia++;
+        // Recorremos la cadena de derecha a izquierda para calcular el valor decimal
+        for (int i = binario.length() - 1; i >= 0; i--) {
+            if (binario.charAt(i) == '1') {
+                decimal += Math.pow(2, potencia);
             }
-        } else {
-            // Si hay un punto, procesamos la parte entera y la fraccionaria
-            String[] partes = dividirBinario(binario);  // Dividimos el binario en parte entera y fraccionaria
-
-            // Parte entera
-            String parteEntera = partes[0];
-            for (int i = parteEntera.length() - 1; i >= 0; i--) {
-                if (parteEntera.charAt(i) == '1') {
-                    decimal += Math.pow(2, potencia);  // Usamos Math.pow(2, potencia) para la parte entera
-                }
-                potencia++;
-            }
-
-            // Parte fraccionaria
-            parteFraccional = partes[1];
-            for (int i = 0; i < parteFraccional.length(); i++) {
-                if (parteFraccional.charAt(i) == '1') {
-                    fraccionaria += Math.pow(2, -(i + 1));  // Parte fraccionaria usando 2^(-i-1)
-                }
-            }
+            potencia++;
         }
 
-        return decimal + fraccionaria;
+        return decimal;
     }
+
     /**
      * Solicita un binario válido y convierte el número binario a decimal.
      * <p>
