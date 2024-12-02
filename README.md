@@ -85,4 +85,4 @@ Al elegir esta opción, se accede a un submenú con las siguientes conversiones:
 
 ## Licencia
 
-Este proyecto está bajo la **Licencia MIT**. Consulta el archivo `LICENSE` para más información.
+Este proyecto no está bajo ninguna licencia.
