@@ -100,21 +100,26 @@ public class Conversiones {
      * @param mensaje El mensaje que indica que tipo de conversión de base se realiza, ya que este mét0do es reutilizado.
      * @return El número decimal que el usuario ingresa, asegurándose de que sea válido.
      */
-    public static int obtenerDecimalValido(String mensaje) { //METODO REUTILIZABLE
+    public static int obtenerDecimalValido(String mensaje) { // METODO REUTILIZABLE
         int decimal;
 
         do {
             System.out.println(mensaje);
-            while (!Escaner.lector.hasNextInt()) { // Verifica si la entrada es un entero
+            String entrada = Escaner.lector.nextLine(); // Lee la entrada como una línea completa
+            try {
+                decimal = Integer.parseInt(entrada); // Intenta convertirla a entero
+                if (decimal < 0) {
+                    System.out.println("Por favor, introduce un número entero no negativo.");
+                }
+            } catch (NumberFormatException e) {
                 System.out.println("Entrada no válida. Por favor, introduce un número entero.");
-                Escaner.lector.next(); // Limpia la entrada incorrecta
+                decimal = -1; // Valor inválido para mantener el bucle
             }
-            decimal = Integer.parseInt(Escaner.lector.nextLine());
         } while (decimal < 0); // Asegura que el número sea no negativo
-
 
         return decimal; // Retorna el valor decimal válido
     }
+
 
     /**
      * Convierte un número decimal a binario.
@@ -145,10 +150,6 @@ public class Conversiones {
 
         // Convertir el número decimal a binario
         String binario = conversionDecimalBinario(decimal);
-
-        if (decimal == 0) { //pequeño manejo del 0
-            binario = "0";
-        }
 
         // Mostrar el resultado
         System.out.println("El número decimal " + decimal + " en binario es: " + binario);
