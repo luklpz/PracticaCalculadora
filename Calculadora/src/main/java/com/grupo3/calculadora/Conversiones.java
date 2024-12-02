@@ -81,7 +81,7 @@ public class Conversiones {
         String binario = obtenerBinarioValido("Dime el binario a convertir en decimal:");
 
         // Convertir el binario a decimal
-        double decimal = conversionBinarioDecimal(binario);
+        int decimal = conversionBinarioDecimal(binario);
 
         // Mostrar el resultado
         System.out.println("El número binario " + binario + " en decimal es: " + decimal);
