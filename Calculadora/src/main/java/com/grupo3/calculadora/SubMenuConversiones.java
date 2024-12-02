@@ -2,7 +2,7 @@ package com.grupo3.calculadora;
 
 import java.util.Scanner;
 
-public class subMenuConversiones {
+public class SubMenuConversiones {
 
     /**
      * Imprime el menú de conversiones y espera a que sea ingresada una opción.

@@ -24,7 +24,7 @@ public class Calculadora {
             switch (opcionSeleccionada) {
                 case 0 -> cerrar=true;
                 case 1 -> SubmenuOperaciones.switchOperaciones();
-                case 2 -> subMenuConversiones.subMenuConv();
+                case 2 -> SubMenuConversiones.subMenuConv();
                 default -> System.out.println();
             }
         } while (!cerrar);
